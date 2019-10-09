@@ -1,35 +1,42 @@
-import React from 'react';
+import React from "react";
+import { connect } from "react-redux";
+import Header from "./components/Header";
+import AddedFeatures from "./components/AddedFeatures";
+import AdditionalFeatures from "./components/AdditionalFeatures";
+import Total from "./components/Total";
+import * as actionCreators from "./state/actionCreators";
 
-import Header from './components/Header';
-import AddedFeatures from './components/AddedFeatures';
-import AdditionalFeatures from './components/AdditionalFeatures';
-import Total from './components/Total';
-
-const App = () => {
+export const App = props => {
   const state = {
     additionalPrice: 0,
     car: {
       price: 26395,
-      name: '2019 Ford Mustang',
+      name: "2019 Ford Mustang",
       image:
-        'https://cdn.motor1.com/images/mgl/0AN2V/s1/2019-ford-mustang-bullitt.jpg',
+        "https://cdn.motor1.com/images/mgl/0AN2V/s1/2019-ford-mustang-bullitt.jpg",
       features: []
     },
     store: [
-      { id: 1, name: 'V-6 engine', price: 1500 },
-      { id: 2, name: 'Racing detail package', price: 1500 },
-      { id: 3, name: 'Premium sound system', price: 500 },
-      { id: 4, name: 'Rear spoiler', price: 250 }
+      { id: 1, name: "V-6 engine", price: 1500 },
+      { id: 2, name: "Racing detail package", price: 1500 },
+      { id: 3, name: "Premium sound system", price: 500 },
+      { id: 4, name: "Rear spoiler", price: 250 }
     ]
   };
 
   const removeFeature = item => {
     // dispatch an action here to remove an item
+    props.removeFeature(item);
   };
 
   const buyItem = item => {
     // dipsatch an action here to add an item
+    props.buyItem(item);
   };
+
+  // `count` comes from the state of the app
+  // `increment` is an action creator
+  // THE GOODIES COME FROM PROPS!!!!! YOU WILL FORGET THIS
 
   return (
     <div className="boxes">
@@ -45,4 +52,10 @@ const App = () => {
   );
 };
 
-export default App;
+// `connect` PLUGS THE APP STATE AND THE ACTION CREATORS
+// INTO THE COMPONENT!!! (through its props)
+export default connect(
+  // callback that takes state and returns it (mapStateToProps)
+  state => state, // we get all slices of state through props (8)
+  actionCreators // we get all action creators through props (9)
+)(App);
