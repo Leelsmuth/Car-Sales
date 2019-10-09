@@ -1,12 +1,12 @@
 import React from "react";
+import * as actionCreators from "./state/actionCreators";
 import { connect } from "react-redux";
 import Header from "./components/Header";
 import AddedFeatures from "./components/AddedFeatures";
 import AdditionalFeatures from "./components/AdditionalFeatures";
 import Total from "./components/Total";
-import * as actionCreators from "./state/actionCreators";
 
-export const App = props => {
+const App = props => {
   const removeFeature = item => {
     // dispatch an action here to remove an item
     props.removeFeature(item);
@@ -16,10 +16,6 @@ export const App = props => {
     // dipsatch an action here to add an item
     props.addFeature(item);
   };
-
-  // `count` comes from the state of the app
-  // `increment` is an action creator
-  // THE GOODIES COME FROM PROPS!!!!! YOU WILL FORGET THIS
 
   return (
     <div className="boxes">
@@ -35,10 +31,7 @@ export const App = props => {
   );
 };
 
-// `connect` PLUGS THE APP STATE AND THE ACTION CREATORS
-// INTO THE COMPONENT!!! (through its props)
 export default connect(
-  // callback that takes state and returns it (mapStateToProps)
-  state => state, // we get all slices of state through props (8)
-  actionCreators // we get all action creators through props (9)
+  state => state,
+  actionCreators
 )(App);

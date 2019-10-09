@@ -1,14 +1,10 @@
-import * as types from "./actionTypes";
-
-// action creators here (7)
-// THIS IS THE PLACE FOR NASTY, IMPURE THINGS
-// like moment.js, uuid, Math.random...
-// COMPONENTS AND REDUCERS SHOULD NOT DEAL WITH THAT STUFF
+const ADD_FEATURE = "ADD_FEATURE";
+const REMOVE_FEATURE = "REMOVE_FEATURE";
 
 export const addFeature = feature => {
-  return { type: types.BUY_ITEM, payload: feature };
+  return { type: ADD_FEATURE, payload: feature };
 };
 
 export const removeFeature = feature => {
-  return { type: types.REMOVE_FEATURE, payload: feature };
+  return { type: REMOVE_FEATURE, payload: feature };
 };

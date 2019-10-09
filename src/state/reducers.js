@@ -1,6 +1,3 @@
-// (3)
-// import { REMOVE_FEATURE, BUY_ITEM } from "./actionTypes";
-
 import * as types from "./actionTypes";
 
 const initialState = {
@@ -20,9 +17,9 @@ const initialState = {
   ]
 };
 
-export function vehicleReducer(state = initialState, action) {
+export const storeReducer = (state = initialState, action) => {
   switch (action.type) {
-    case types.BUY_ITEM:
+    case types.ADD_FEATURE:
       return {
         ...state,
         store: state.store.filter(item => item.id !== action.payload.id),
@@ -44,7 +41,8 @@ export function vehicleReducer(state = initialState, action) {
         },
         store: state.store.concat([action.payload])
       };
+
     default:
       return state;
   }
-}
+};
