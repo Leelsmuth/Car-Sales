@@ -25,18 +25,24 @@ export function vehicleReducer(state = initialState, action) {
     case types.BUY_ITEM:
       return {
         ...state,
-        additionalPrice: state.additionalPrice + action.payload.price,
+        store: state.store.filter(item => item.id !== action.payload.id),
         car: {
           ...state.car,
-          features: [...state.car.features, action.payload.name]
+          features: state.car.features.concat([action.payload]),
+          price: state.car.price + action.payload.price
         }
       };
     case types.REMOVE_FEATURE:
       return {
         ...state,
-        features: state.car.features.filter(
-          feature => feature.name !== action.payload.name
-        )
+        car: {
+          ...state.car,
+          features: state.car.features.filter(
+            item => item.id !== action.payload.id
+          ),
+          price: state.car.price - action.payload.price
+        },
+        store: state.store.concat([action.payload])
       };
     default:
       return state;
